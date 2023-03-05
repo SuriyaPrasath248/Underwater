@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class swimmer : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class swimmer : MonoBehaviour
     [SerializeField] InputActionReference leftControlVelocity;
     [SerializeField] InputActionReference rightControlVelocity;
     [SerializeField] Transform trackingReference;
-
+    public Text debugConsol;
     Rigidbody _rigidbody;
     float _coolDownTimer;
 
@@ -40,7 +40,7 @@ public class swimmer : MonoBehaviour
             var rightHandVelocity = rightControlVelocity.action.ReadValue<Vector3>();
             Vector3 localVelocity = leftHandVelocity + rightHandVelocity;
             localVelocity *= -1;
-
+            debugConsol.text = "Velocity is :" + localVelocity;
             if (localVelocity.sqrMagnitude > minForce * minForce)
             {
                 Vector3 worldVelocity = trackingReference.TransformDirection(localVelocity);
