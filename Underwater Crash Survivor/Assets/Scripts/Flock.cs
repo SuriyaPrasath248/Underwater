@@ -10,6 +10,17 @@ public class Flock : MonoBehaviour
     [SerializeField] private int flockSize;
     [SerializeField] private Vector3 spawnBounds;
 
+    [Header("Initialize size")]
+    [Range(0, 10)]
+    [SerializeField] private float _minsize;
+    public float minsize { get { return _minsize; } }
+    [Range(0, 10)]
+    [SerializeField] private float _maxsize;
+    public float maxsize { get { return _maxsize; } }
+   
+
+
+
     [Header("Speed Setup")]
     [Range(0, 10)]
     [SerializeField] private float _minSpeed;
@@ -91,6 +102,8 @@ public class Flock : MonoBehaviour
             allUnits[i] = Instantiate(flockUnitPrefab, spawnPosition, rotation);
             allUnits[i].AssignFlock(this);
             allUnits[i].InitializeSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
+            allUnits[i].transform.localScale = Vector3.one * UnityEngine.Random.Range(minsize, maxsize);
+              
         }
     }
 }
